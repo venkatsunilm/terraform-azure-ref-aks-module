@@ -67,7 +67,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 # Data Source
 data "azuread_service_principal" "aks" {
-  client_id = var.service_principal_client_id
+  object_id = var.service_principal_client_id
 }
 
 # Resource Definition
