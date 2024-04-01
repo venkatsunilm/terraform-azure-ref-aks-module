@@ -1,9 +1,9 @@
-[![Build Status](https://dev.azure.com/jcorioland-msft/terraform-azure-reference/_apis/build/status/jcorioland.terraform-azure-ref-aks-module?branchName=master)](https://dev.azure.com/jcorioland-msft/terraform-azure-reference/_build/latest?definitionId=32&branchName=master)
+<!-- [![Build Status](https://dev.azure.com/jcorioland-msft/terraform-azure-reference/_apis/build/status/jcorioland.terraform-azure-ref-aks-module?branchName=master)](https://dev.azure.com/jcorioland-msft/terraform-azure-reference/_build/latest?definitionId=32&branchName=master) -->
 
 # Azure Kubernetes Service (AKS) Terraform Module
 
 This modules allows to deploy an Azure Kubernetes Service cluster into an existing subnet.
-It is part of the reference archicture for Terraform on Azure. More details can be found on the [main repository](https://github.com/jcorioland/terraform-azure-reference). 
+It is part of the reference archicture for Terraform on Azure. More details can be found on the [main repository](https://github.com/venkatsunilm/TerraformAzure). 
 
 ## Usage
 
@@ -11,8 +11,8 @@ It is part of the reference archicture for Terraform on Azure. More details can 
 module "tf-ref-aks-module" {
   source                           = "../../"
   environment                      = "Development"
-  location                         = "francecentral"
-  kubernetes_version               = "1.15.5"
+  location                         = "westeurope"
+  kubernetes_version               = "1.29.3"
   service_principal_client_id      = "<CLIENT_ID>"
   service_principal_client_secret  = "<CLIENT_SECRET>"
 }
@@ -20,7 +20,7 @@ module "tf-ref-aks-module" {
 
 ## Scenarios
 
-It is part of the reference architecture for Terraform on Azure. More details can be found on the [main repository](https://github.com/jcorioland/terraform-azure-reference). 
+It is part of the reference architecture for Terraform on Azure. More details can be found on the [main repository](https://github.com/venkatsunilm/TerraformAzure). 
 
 ## Examples
 

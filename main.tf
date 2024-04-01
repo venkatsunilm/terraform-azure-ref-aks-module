@@ -1,11 +1,20 @@
-provider "azuread" {
-  version = "~> 0.7.0"
-}
+# This Terraform configuration file deploys an Azure Kubernetes Service (AKS) cluster 
+# using the azurerm provider and azuread provider.
 
+# Provider Configuration
 provider "azurerm" {
-  version = "~> 1.39.0"
+  # skip_provider_registration = true 
+  # This is only required when the User, Service Principal, 
+  # or Identity running Terraform lacks the permissions to register Azure Resource Providers.
+  features {}
 }
 
+provider "azuread" {
+  # tenant_id     = "..."
+  tenant_id = "3cc81ecf-3567-40ec-be2f-1d81b6d06f86"
+}
+
+# Data Sources
 data "azurerm_resource_group" "rg" {
   name = "tf-ref-${var.environment}-rg"
 }
@@ -16,6 +25,7 @@ data "azurerm_subnet" "aks" {
   resource_group_name  = data.azurerm_resource_group.rg.name
 }
 
+# Resource Definitions
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "tf-ref-${var.environment}-aks"
   location            = data.azurerm_resource_group.rg.location
@@ -48,22 +58,21 @@ resource "azurerm_kubernetes_cluster" "aks" {
     network_plugin = "kubenet"
   }
 
-  role_based_access_control {
-    enabled = true
-  }
+  role_based_access_control_enabled = true
 
   tags = {
     Environment = var.environment
   }
 }
 
+# Data Source
 data "azuread_service_principal" "aks" {
-  application_id = var.service_principal_client_id
+  client_id = var.service_principal_client_id
 }
 
+# Resource Definition
 resource "azurerm_role_assignment" "netcontribrole" {
   scope                = data.azurerm_subnet.aks.id
   role_definition_name = "Network Contributor"
   principal_id         = data.azuread_service_principal.aks.object_id
 }
-
