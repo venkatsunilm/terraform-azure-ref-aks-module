@@ -1,5 +1,14 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~>3.97.1"
+    }
+  }
+}
+
 provider "azurerm" {
-  version = "~> 1.39.0"
+  features {}
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -18,6 +27,6 @@ resource "azurerm_subnet" "aks" {
   name                 = "aks-subnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.aks.name
-  address_prefix       = "10.1.0.0/24"
+  address_prefixes     = ["10.1.0.0/24"]
 }
 

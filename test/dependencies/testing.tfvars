@@ -1,2 +1,2 @@
-environment        = "test"
-location           = "francecentral"
+environment = "test"
+location    = "westeurope"
